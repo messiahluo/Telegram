@@ -152,7 +152,8 @@ public class LocaleController {
         addRules(new String[]{"shi"}, new PluralRules_Tachelhit());
         addRules(new String[]{"mt"}, new PluralRules_Maltese());
         addRules(new String[]{"ga", "se", "sma", "smi", "smj", "smn", "sms"}, new PluralRules_Two());
-        addRules(new String[]{"ak", "am", "bh", "fil", "tl", "guw", "hi", "ln", "mg", "nso", "ti", "wa"}, new PluralRules_Zero());
+        addRules(new String[]{"ak", "am", "bh", "fil", "tl", "guw", "hi", "ln", "mg", "nso", "ti",
+                "wa"}, new PluralRules_Zero());
         addRules(new String[]{"az", "bm", "fa", "ig", "hu", "ja", "kde", "kea", "ko", "my", "ses", "sg", "to",
                 "tr", "vi", "wo", "yo", "zh", "bo", "dz", "id", "jv", "ka", "km", "kn", "ms", "th"}, new PluralRules_None());
 
@@ -223,6 +224,14 @@ public class LocaleController {
         localeInfo.name = "한국어";
         localeInfo.nameEnglish = "Korean";
         localeInfo.shortName = "ko";
+        localeInfo.pathToFile = null;
+        sortedLanguages.add(localeInfo);
+        languagesDict.put(localeInfo.shortName, localeInfo);
+
+        localeInfo = new LocaleInfo();
+        localeInfo.name = "简体中文";
+        localeInfo.nameEnglish = "Chinese(Simpified)";
+        localeInfo.shortName = "zh_CN";
         localeInfo.pathToFile = null;
         sortedLanguages.add(localeInfo);
         languagesDict.put(localeInfo.shortName, localeInfo);
@@ -715,9 +724,13 @@ public class LocaleController {
             if (dateDay == day && year == dateYear) {
                 return String.format("%s %s %s", LocaleController.getString("LastSeen", R.string.LastSeen), LocaleController.getString("TodayAt", R.string.TodayAt), formatterDay.format(new Date(date * 1000)));
             } else if (dateDay + 1 == day && year == dateYear) {
-                return String.format("%s %s %s", LocaleController.getString("LastSeen", R.string.LastSeen), LocaleController.getString("YesterdayAt", R.string.YesterdayAt), formatterDay.format(new Date(date * 1000)));
+                return String.format("%s %s %s",
+                        LocaleController.getString("LastSeen", R.string.LastSeen),
+                        LocaleController.getString("YesterdayAt", R.string.YesterdayAt), formatterDay.format(new Date(date * 1000)));
             } else if (year == dateYear) {
-                String format = LocaleController.formatString("formatDateAtTime", R.string.formatDateAtTime, formatterMonth.format(new Date(date * 1000)), formatterDay.format(new Date(date * 1000)));
+                String format = LocaleController.formatString("formatDateAtTime", R.string.formatDateAtTime,
+                        formatterMonth.format(new Date(date * 1000)),
+                        formatterDay.format(new Date(date * 1000)));
                 return String.format("%s %s", LocaleController.getString("LastSeenDate", R.string.LastSeenDate), format);
             } else {
                 String format = LocaleController.formatString("formatDateAtTime", R.string.formatDateAtTime, formatterYear.format(new Date(date * 1000)), formatterDay.format(new Date(date * 1000)));
